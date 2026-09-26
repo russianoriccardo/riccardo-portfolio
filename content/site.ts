@@ -8,7 +8,7 @@ export const site = {
     "I am a UI/UX DESIGNER Turning complex ideas into impactful and user friendly experiences.",
   url: "https://riccardorussiano.com",
   email: "russianoriccardo@gmail.com",
-  instagram: "https://www.instagram.com/uxriccardo/",
+  instagram: "https://www.instagram.com/riccardo_intech/",
   linkedin: "https://www.linkedin.com/in/riccardo-russiano/",
 
   nav: [
