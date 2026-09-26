@@ -84,11 +84,7 @@ h3 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.2;
-  transition: opacity 0.2s;
-}
-
-.button:hover {
-  opacity: 0.9;
+  transition: transform 0.3s ease;
 }
 
 /* Rich text (case study copy) */
@@ -333,6 +329,18 @@ h3 {
   border: 1px solid var(--black);
   border-radius: 30px;
   background: var(--bg);
+  transition: transform 0.3s ease;
+}
+
+/* Cards and buttons grow slightly on hover, as on the Framer site. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: scale(1.02);
+  }
+
+  .button:hover {
+    transform: scale(1.05);
+  }
 }
 
 .card-wide {
