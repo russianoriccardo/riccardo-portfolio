@@ -6,6 +6,7 @@ import Compare from "@/components/Compare";
 import Connect from "@/components/Connect";
 import { ArrowLeft } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
+import Reveal from "@/components/Reveal";
 import { getProject, projects, type Block } from "@/content/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -84,8 +85,10 @@ export default async function ProjectPage({ params }: Props) {
       <section className="other-projects">
         <h2>Other projects I worked on</h2>
         <div className="other-grid">
-          {others.map((p) => (
-            <ProjectCard key={p.slug} project={p} compact />
+          {others.map((p, i) => (
+            <Reveal key={p.slug} from={i % 2 === 0 ? "left" : "right"}>
+              <ProjectCard project={p} compact />
+            </Reveal>
           ))}
         </div>
       </section>
