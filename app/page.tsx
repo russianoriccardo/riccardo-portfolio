@@ -2,6 +2,7 @@ import Image from "next/image";
 import Connect from "@/components/Connect";
 import Header from "@/components/Header";
 import ProjectCard from "@/components/ProjectCard";
+import Reveal from "@/components/Reveal";
 import { getProject, site } from "@/content/site";
 
 export default function Home() {
@@ -13,11 +14,11 @@ export default function Home() {
       <Header />
       <main className="container">
         <section className="hero" id="about">
-          <h1>{hero.heading}</h1>
+          <h1 className="slide-in-left">{hero.heading}</h1>
           <div className="hero-body">
-            <div className="hero-intro" dangerouslySetInnerHTML={{ __html: hero.introHtml }} />
+            <div className="hero-intro slide-in-left" dangerouslySetInnerHTML={{ __html: hero.introHtml }} />
             <Image
-              className="hero-avatar"
+              className="hero-avatar slide-in-right"
               src={hero.avatar.src}
               width={hero.avatar.width}
               height={hero.avatar.height}
@@ -46,9 +47,13 @@ export default function Home() {
           <h2 className="section-heading">{site.featured.heading}</h2>
           <p className="section-subheading">{site.featured.subheading}</p>
           <div className="featured-grid">
-            <ProjectCard project={first} wide />
-            {rest.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+            <Reveal className="card-wide">
+              <ProjectCard project={first} wide />
+            </Reveal>
+            {rest.map((p, i) => (
+              <Reveal key={p.slug} from={i % 2 === 0 ? "left" : "right"}>
+                <ProjectCard project={p} />
+              </Reveal>
             ))}
           </div>
         </section>
