@@ -1,0 +1,96 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import Compare from "@/components/Compare";
+import Connect from "@/components/Connect";
+import { ArrowLeft } from "@/components/Icons";
+import ProjectCard from "@/components/ProjectCard";
+import { getProject, projects, type Block } from "@/content/site";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = getProject((await params).slug);
+  if (!project) return {};
+  return { alternates: { canonical: `/${project.slug}` } };
+}
+
+const sizes = "(max-width: 1040px) 100vw, 1000px";
+
+function renderBlock(block: Block, i: number) {
+  switch (block.type) {
+    case "heading":
+      return <h2 key={i} className="block block-heading">{block.text}</h2>;
+    case "text":
+      return <div key={i} className="block rich" dangerouslySetInnerHTML={{ __html: block.html }} />;
+    case "columns":
+      return (
+        <div key={i} className="block columns">
+          <div className="rich" dangerouslySetInnerHTML={{ __html: block.left }} />
+          <div className="rich" dangerouslySetInnerHTML={{ __html: block.right }} />
+        </div>
+      );
+    case "image":
+      return (
+        <Image
+          key={i}
+          className="block block-image"
+          src={block.image.src}
+          width={block.image.width}
+          height={block.image.height}
+          sizes={sizes}
+          alt=""
+        />
+      );
+    case "caption":
+      return <p key={i} className="block block-caption">{block.text}</p>;
+    case "compare":
+      return (
+        <div key={i} className="block block-compare">
+          <Compare before={block.before} after={block.after} sizes={sizes} />
+        </div>
+      );
+  }
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const project = getProject((await params).slug);
+  if (!project) notFound();
+
+  const others = project.related.map((s) => getProject(s)!);
+
+  return (
+    <main className="container project">
+      <Link href="/" className="button back-button">
+        <ArrowLeft />
+        Go back to the Home
+      </Link>
+
+      <h1 className="project-title">{project.titleHtml.replace(/<[^>]+>/g, "")}</h1>
+      <div className="columns project-intro">
+        <div className="rich" dangerouslySetInnerHTML={{ __html: project.summaryHtml }} />
+        <div className="rich" dangerouslySetInnerHTML={{ __html: project.detailsHtml }} />
+      </div>
+
+      {project.blocks.map(renderBlock)}
+
+      <section className="other-projects">
+        <h2>Other projects I worked on</h2>
+        <div className="other-grid">
+          {others.map((p) => (
+            <ProjectCard key={p.slug} project={p} compact />
+          ))}
+        </div>
+      </section>
+
+      <Connect />
+    </main>
+  );
+}
