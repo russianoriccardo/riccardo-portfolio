@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${roboto.variable} ${lato.variable} ${inter.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${roboto.variable} ${lato.variable} ${inter.variable}`}>
       <head>
         <noscript>
           <style>{`.reveal { opacity: 1 !important; transform: none !important; }`}</style>

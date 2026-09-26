@@ -22,6 +22,8 @@
   box-sizing: border-box;
 }
 
+/* Smooth scrolling for in-page links only: Next.js turns it off while changing pages
+   because <html> has data-scroll-behavior="smooth" (see app/layout.tsx). */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -404,6 +406,17 @@ h3 {
 
 /* Entrance animations */
 
+/* Each page fades in when it opens (see app/template.tsx). */
+.page {
+  animation: page-in 0.4s ease both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+
 /* Hero text and illustration slide in from opposite sides on first load. */
 .slide-in-left {
   animation: slide-in-left 1s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -462,6 +475,7 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page,
   .slide-in-left,
   .slide-in-right {
     animation: none;
