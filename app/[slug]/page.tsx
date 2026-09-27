@@ -4,10 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Compare from "@/components/Compare";
 import Connect from "@/components/Connect";
+import ExplainLayer from "@/components/ExplainLayer";
 import { ArrowLeft } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
-import { getProject, projects, type Block } from "@/content/site";
+import { explanations, noLiveExplanations } from "@/content/explanations";
+import { getProject, projects, site, type Block } from "@/content/site";
+import { sectionId } from "@/content/text";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,14 +29,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const sizes = "(max-width: 1040px) 100vw, 1000px";
 
 function renderBlock(block: Block, i: number) {
+  // Every block gets an anchor for an explanation's "Jump to the source" link (see content/text.ts).
+  const id = `src-${sectionId(block, i)}`;
   switch (block.type) {
     case "heading":
-      return <h2 key={i} className="block block-heading">{block.text}</h2>;
+      return <h2 key={i} id={id} className="block block-heading">{block.text}</h2>;
     case "text":
-      return <div key={i} className="block rich" dangerouslySetInnerHTML={{ __html: block.html }} />;
+      return <div key={i} id={id} className="block rich" dangerouslySetInnerHTML={{ __html: block.html }} />;
     case "columns":
       return (
-        <div key={i} className="block columns">
+        <div key={i} id={id} className="block columns">
           <div className="rich" dangerouslySetInnerHTML={{ __html: block.left }} />
           <div className="rich" dangerouslySetInnerHTML={{ __html: block.right }} />
         </div>
@@ -51,7 +56,7 @@ function renderBlock(block: Block, i: number) {
         />
       );
     case "caption":
-      return <p key={i} className="block block-caption">{block.text}</p>;
+      return <p key={i} id={id} className="block block-caption">{block.text}</p>;
     case "compare":
       return (
         <div key={i} className="block block-compare">
@@ -66,6 +71,8 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   const others = project.related.map((s) => getProject(s)!);
+  const projectExplanations = explanations[project.slug] ?? {};
+  const hasExplanations = Object.keys(projectExplanations).length > 0;
 
   return (
     <main className="container project">
@@ -75,12 +82,25 @@ export default async function ProjectPage({ params }: Props) {
       </Link>
 
       <h1 className="project-title">{project.titleHtml.replace(/<[^>]+>/g, "")}</h1>
-      <div className="columns project-intro">
-        <div className="rich" dangerouslySetInnerHTML={{ __html: project.summaryHtml }} />
-        <div className="rich" dangerouslySetInnerHTML={{ __html: project.detailsHtml }} />
-      </div>
+      {hasExplanations && (
+        <p className="explain-hint">
+          <strong>New</strong> Tap an underlined phrase to see the reasoning behind it.
+        </p>
+      )}
 
-      {project.blocks.map(renderBlock)}
+      <ExplainLayer
+        slug={project.slug}
+        explanations={projectExplanations}
+        liveExplanations={!noLiveExplanations.includes(project.slug)}
+        email={site.email}
+      >
+        <div id="src-intro" className="columns project-intro">
+          <div className="rich" dangerouslySetInnerHTML={{ __html: project.summaryHtml }} />
+          <div className="rich" dangerouslySetInnerHTML={{ __html: project.detailsHtml }} />
+        </div>
+
+        {project.blocks.map(renderBlock)}
+      </ExplainLayer>
 
       <section className="other-projects">
         <h2>Other projects I worked on</h2>
