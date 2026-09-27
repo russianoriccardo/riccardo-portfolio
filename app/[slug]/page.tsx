@@ -72,6 +72,9 @@ export default async function ProjectPage({ params }: Props) {
 
   const others = project.related.map((s) => getProject(s)!);
   const projectExplanations = explanations[project.slug] ?? {};
+  // Generated answers need an API key (read at build time; redeploy after adding it on Vercel).
+  // Without one, unmatched selections show "Not covered on this page", as for case studies under NDA.
+  const liveExplanations = !noLiveExplanations.includes(project.slug) && Boolean(process.env.ANTHROPIC_API_KEY);
   const hasExplanations = Object.keys(projectExplanations).length > 0;
 
   return (
@@ -91,7 +94,7 @@ export default async function ProjectPage({ params }: Props) {
       <ExplainLayer
         slug={project.slug}
         explanations={projectExplanations}
-        liveExplanations={!noLiveExplanations.includes(project.slug)}
+        liveExplanations={liveExplanations}
         email={site.email}
       >
         <div id="src-intro" className="columns project-intro">

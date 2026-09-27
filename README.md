@@ -46,4 +46,4 @@ Highlighting any other text shows an "Explain this" button. If the selection tou
 
 Abuse protection: selections of 3–300 characters that appear on the page, 10 model requests per IP per 10 minutes, and cached answers per case study and selection. The limits and cache are in memory, so each server instance keeps its own.
 
-Environment variable (see `.env.example`): `ANTHROPIC_API_KEY`. Without it, the "Explain this" button shows "Explanations are not available right now"; underlined phrases still work.
+Environment variable (see `.env.example`): `ANTHROPIC_API_KEY`. It's optional: without it, underlined phrases still work and other selections show "Not covered on this page". After adding it on Vercel, redeploy so the pages pick it up.

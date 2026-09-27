@@ -96,8 +96,8 @@ export async function POST(request: Request) {
     return json({ error: `Select between ${MIN_LENGTH} and ${MAX_LENGTH} characters` }, 400);
   }
 
-  // Under NDA: never generated.
-  if (noLiveExplanations.includes(project.slug)) return json(notCovered);
+  // Under NDA, or no API key configured: never generated.
+  if (noLiveExplanations.includes(project.slug) || !process.env.ANTHROPIC_API_KEY) return json(notCovered);
 
   // Only passages that are actually on this page can be explained.
   const pageText = projectText(project);
@@ -109,11 +109,6 @@ export async function POST(request: Request) {
 
   if (rateLimited(clientIp(request))) {
     return json({ error: "Too many requests. Please try again in a few minutes." }, 429);
-  }
-
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("explain: ANTHROPIC_API_KEY is not set");
-    return json({ error: "Explanations are not available right now." }, 503);
   }
 
   const client = new Anthropic();
