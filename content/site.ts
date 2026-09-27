@@ -1,5 +1,7 @@
 // All site copy, links and project case studies live in this file.
 // Text fields ending in "Html" accept simple inline HTML (<strong>, <em>, <br>, <p>, <ul>, <ol>, <li>).
+// On case study pages, <span data-explain="ID">…</span> marks a phrase that opens an explanation
+// from content/explanations.ts. Run `npm run check:explanations` after editing either file.
 
 export const site = {
   name: "Riccardo Russiano",
@@ -72,13 +74,15 @@ export const site = {
 
 export type Img = { src: string; width: number; height: number };
 
-export type Block =
+// `id` is optional; it lets an explanation's "Jump to the source" link find the block (see content/explanations.ts).
+export type Block = (
   | { type: "heading"; text: string }
   | { type: "text"; html: string }
   | { type: "columns"; left: string; right: string }
   | { type: "image"; image: Img }
   | { type: "caption"; text: string }
-  | { type: "compare"; before: Img; after: Img };
+  | { type: "compare"; before: Img; after: Img }
+) & { id?: string };
 
 export type Project = {
   slug: string;
@@ -119,7 +123,8 @@ export const projects: Project[] = [
       { type: "heading", text: "CONDUCTING QUALITATIVE INTERVIEWS TO ASSESS THE MAIN TRUST ISSUES" },
       {
         type: "text",
-        html: "<p>Social media platforms have several problems and painpoints. After conducting some user interviews, these are the key issues we identified:</p>",
+        id: "interviews",
+        html: "<p>Social media platforms have several problems and painpoints. After conducting some <span data-explain=\"sb-interviews\">user interviews</span>, these are the key issues we identified:</p>",
       },
       {
         type: "columns",
@@ -136,7 +141,8 @@ export const projects: Project[] = [
       { type: "heading", text: "THE RESEARCH LEADING TO THE DESIGN OF A SAFER SOCIAL MEDIA EXPERIENCE" },
       {
         type: "columns",
-        left: "<p><strong>1/4 - Researching the competition to better understand existing painpoints</strong></p><p>Another useful step was analyzing the most popular social media platforms, to better target the main problems highlighted during the first interview.</p><p>This helped us to research common weaknesses and pain points, but also existing way they may have to provide safe interactions.</p>",
+        id: "research-1",
+        left: "<p><strong>1/4 - Researching the competition to better understand existing painpoints</strong></p><p>Another useful step was <span data-explain=\"sb-competition\">analyzing the most popular social media platforms</span>, to better target the main problems highlighted during the first interview.</p><p>This helped us to research common weaknesses and pain points, but also existing way they may have to provide safe interactions.</p>",
         right:
           "<p><strong>2/4 Breaking down the main issues, to define solutions to tackle them</strong></p><p>Visualizing the main painpoints on a board has been useful for brainstorming solutions to tackle them.</p><p>For everyone of the main painpoints, we broke down some possible solutions, oriented to improve interactions between user and build a safe platform.</p>",
       },
@@ -152,13 +158,15 @@ export const projects: Project[] = [
       },
       {
         type: "columns",
-        left: "<p><strong>3/4 Implementing flows to improve safer engagement</strong></p><p>The core issue is <strong>trust before engagement</strong>, so the solutions implemented are meant to reduce uncertainty before the interaction happens.</p><p>Some of the applied solutions are:</p><ul><li>requesting identity verification before allowing allowing users to start to engage with other people on the platform, under any aspect (friends request, direct messaging, creation of events and meetups...)</li><li>hiding the profile picture when viewing profiles of users who are not friends yet</li><li>limting the user profile view to matching interest, and showing a percentage of affinity according to interests that two users have in common</li></ul>",
+        id: "research-3",
+        left: "<p><strong>3/4 Implementing flows to improve safer engagement</strong></p><p>The core issue is <strong><span data-explain=\"sb-trust-first\">trust before engagement</span></strong>, so the solutions implemented are meant to reduce uncertainty before the interaction happens.</p><p>Some of the applied solutions are:</p><ul><li><span data-explain=\"sb-verification\">requesting identity verification</span> before allowing allowing users to start to engage with other people on the platform, under any aspect (friends request, direct messaging, creation of events and meetups...)</li><li><span data-explain=\"sb-hidden-photo\">hiding the profile picture</span> when viewing profiles of users who are not friends yet</li><li>limting the user profile view to matching interest, and showing a <span data-explain=\"sb-affinity\">percentage of affinity</span> according to interests that two users have in common</li></ul>",
         right:
-          "<p><strong>4/4 Cross-department iteration and feedback to validate decisions and integrate them in the product</strong></p><p>Because these decisions impacted not only the user experience but also moderation technical feasibility, and business priorities, collaboration with other departments is an important part of the workflow.</p><p>One focus area was for example <strong>balancing users’ trust with onboarding friction</strong>, which required some back and forth between design exploration and stakeholder alignment, to find solutions that secure trust, but don’t create too much friction and drop off.</p><p>A solution for solving this was found by providing the user with a very light sign up and onboarding flow, which doesn’t require too many verification steps, and adding some extra security layer the moment when users start engaging with other people.</p>",
+          "<p><strong>4/4 Cross-department iteration and feedback to validate decisions and integrate them in the product</strong></p><p>Because these decisions impacted not only the user experience but also moderation technical feasibility, and business priorities, collaboration with other departments is an important part of the workflow.</p><p>One focus area was for example <strong><span data-explain=\"sb-light-onboarding\">balancing users’ trust with onboarding friction</span></strong>, which required some back and forth between design exploration and stakeholder alignment, to find solutions that secure trust, but don’t create too much friction and drop off.</p><p>A solution for solving this was found by providing the user with a very light sign up and onboarding flow, which doesn’t require too many verification steps, and adding some extra security layer the moment when users start engaging with other people.</p>",
       },
       { type: "image", image: img("social-bonding-flows.png", 2048, 1781) },
       {
         type: "caption",
+        id: "flows-caption",
         text: "When defining user flows where the user interact with other users on the platform, we included some verification steps, to make sure that unverified users can't start interacting/creating activities, as a way to provide more secure interactions",
       },
       { type: "image", image: img("social-bonding-screens-1.png", 1892, 1181) },
@@ -213,9 +221,10 @@ export const projects: Project[] = [
       { type: "heading", text: "GREENMATCH SOLAR LEAD GEN FORM - THE RESEARCH BEHIND THE REDESIGN" },
       {
         type: "columns",
-        left: "<p><strong>1/2 Three layers of discovery to uncover core issues in the form</strong></p><p>I structured discovery into three layers:</p><ol class=\"spaced\"><li>usability and accessibility evaluation of the existing flow (testing the flow, conducting accessibility tests);</li><li>qualitative review analysis through Trustpilot reviews to understand abandonment triggers;</li><li>competitor analysis to identify expected trust and reassurance patterns.</li></ol>",
+        id: "research",
+        left: "<p><strong>1/2 Three layers of discovery to uncover core issues in the form</strong></p><p>I structured discovery into <span data-explain=\"gm-three-layers\">three layers</span>:</p><ol class=\"spaced\"><li>usability and accessibility evaluation of the existing flow (testing the flow, conducting accessibility tests);</li><li>qualitative review analysis through <span data-explain=\"gm-reviews\">Trustpilot reviews</span> to understand abandonment triggers;</li><li>competitor analysis to identify expected trust and reassurance patterns.</li></ol>",
         right:
-          "<p><strong>2/2 Putting together the findings from the research to design solutions</strong></p><p>The research revelead that the core issues where not only related to lack of usability, but also <strong>lack of information and trust concerning follow-up</strong> after the form competion.</p><p>I prioritized two design solutions:</p><ol class=\"spaced\"><li><strong>reduce cognitive friction</strong> of the form by improving its structure and accessibility;</li><li><strong>increase trust and improve information</strong> about benefits and expectations after completing the flow</li></ol>",
+          "<p><strong>2/2 Putting together the findings from the research to design solutions</strong></p><p>The research revealed that the core issues were not only related to lack of usability, but also <strong><span data-explain=\"gm-follow-up\">lack of information and trust concerning follow-up</span></strong> after the form completion.</p><p>I prioritized two design solutions:</p><ol class=\"spaced\"><li><strong><span data-explain=\"gm-cognitive-friction\">reduce cognitive friction</span></strong> of the form by improving its structure and accessibility;</li><li><strong><span data-explain=\"gm-trust-information\">increase trust and improve information</span></strong> about benefits and expectations after completing the flow</li></ol>",
       },
       { type: "image", image: img("greenmatch-competitors.png", 2048, 1008) },
       {
@@ -230,7 +239,8 @@ export const projects: Project[] = [
       { type: "heading", text: "THE DESIGN SOLUTIONS TO FIX THE FORM" },
       {
         type: "text",
-        html: "<p>I <strong>redesigned the form architecture</strong> to improve scannability and reduce confusing behavior when multiple options were displayed.</p><p>In parallel, <strong>I introduced reassurance elements</strong> such as clearer benefit communication, stronger social proof, and explicit expectations.</p>",
+        id: "solutions",
+        html: "<p>I <strong><span data-explain=\"gm-architecture\">redesigned the form architecture</span></strong> to improve scannability and reduce confusing behavior when multiple options were displayed.</p><p>In parallel, <strong><span data-explain=\"gm-reassurance\">I introduced reassurance elements</span></strong> such as clearer benefit communication, stronger social proof, and explicit expectations.</p>",
       },
       { type: "image", image: img("greenmatch-solution-1.png", 1892, 1181) },
       { type: "image", image: img("greenmatch-solution-2.png", 1892, 1181) },
@@ -261,9 +271,10 @@ export const projects: Project[] = [
       { type: "heading", text: "THE RESEARCH AND DESIGN PROCESS BEHIND VENATO" },
       {
         type: "columns",
-        left: "<p><strong>1/4 - Qualitative interviews to uncover online resellers painpoints</strong></p><p>I focused on fast qualitative interviews with online resellers to identify the most time-consuming steps in their workflow.</p><p>The most valuable insight was that users didn’t simply need faster cross-listing.<br>They also needed decision support in pricing and description generation, as these are the factors that create the most friction in the flow.</p>",
+        id: "research-1",
+        left: "<p><strong>1/4 - Qualitative interviews to uncover online resellers painpoints</strong></p><p>I focused on <span data-explain=\"ve-interviews\">fast qualitative interviews</span> with online resellers to identify the most time-consuming steps in their workflow.</p><p>The most valuable insight was that users didn’t simply need faster cross-listing.<br>They also needed <span data-explain=\"ve-decision-support\">decision support in pricing and description generation</span>, as these are the factors that create the most friction in the flow.</p>",
         right:
-          "<p><strong>2/4 Turning research insights into core features for the product</strong></p><p>Based on the research, I prioritized three strategic core features:</p><ul><li>reducing manual effort through AI-assisted listing generation</li><li>improving seller confidence through ipricing support</li><li>creating longer-term retention through inventory and portfolio tracking</li></ul>",
+          "<p><strong>2/4 Turning research insights into core features for the product</strong></p><p>Based on the research, I prioritized three strategic core features:</p><ul><li>reducing manual effort through <span data-explain=\"ve-ai-listing\">AI-assisted listing generation</span></li><li>improving seller confidence through ipricing support</li><li>creating longer-term retention through <span data-explain=\"ve-tracking\">inventory and portfolio tracking</span></li></ul>",
       },
       { type: "image", image: img("venato-competitors.png", 1800, 1000) },
       {
@@ -272,9 +283,10 @@ export const projects: Project[] = [
       },
       {
         type: "columns",
-        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a rapid loop of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, collaboration with the CTO and the Project Manager was crucial to validate design decisions.</p>",
+        id: "research-3",
+        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a <span data-explain=\"ve-rapid-loop\">rapid loop</span> of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, collaboration with the CTO and the Project Manager was crucial to validate design decisions.</p>",
         right:
-          "<p><strong>4/4 - Quick wireframing and prototyping to validate product value proposition with test users</strong></p><p>Wireframes were reviewed early with the CTO and PM to quickly validate feasibility, business value, and investor-facing clarity before moving into high-fidelity design and prototyping.</p>",
+          "<p><strong>4/4 - Quick wireframing and prototyping to validate product value proposition with test users</strong></p><p><span data-explain=\"ve-early-wireframes\">Wireframes were reviewed early</span> with the CTO and PM to quickly validate feasibility, business value, and investor-facing clarity before moving into high-fidelity design and prototyping.</p>",
       },
       { type: "image", image: img("venato-iteration.png", 1800, 1024) },
       {
@@ -292,7 +304,8 @@ export const projects: Project[] = [
       { type: "heading", text: "FINAL CONSIDERATIONS" },
       {
         type: "text",
-        html: "<p>Even though the concept was not approved for investment, the sprint helped surface the viability and market assumptions early, preventing the investor committee from committing larger resources without stronger validation.</p><p>One of the most valuable learnings from this project was understanding how design can accelerate strategic decisions, even when the outcome is negative. <br>In many ways, helping the business to make an informed decision faster is just as valuable as shipping the product itself.</p>",
+        id: "final",
+        html: "<p>Even though the concept was not approved for investment, the sprint helped surface the viability and market assumptions early, preventing the investor committee from committing larger resources without stronger validation.</p><p>One of the most valuable learnings from this project was understanding how design can <span data-explain=\"ve-fast-decision\">accelerate strategic decisions</span>, even when the outcome is negative. <br>In many ways, helping the business to make an informed decision faster is just as valuable as shipping the product itself.</p>",
       },
     ],
   },

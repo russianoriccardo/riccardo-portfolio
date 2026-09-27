@@ -13,6 +13,9 @@
   --panel: #eeedf0;
   --panel-button: #f8f7fa;
   --media-bg: #f6f6f8;
+  --reviewed-bg: #e3f3e6;
+  --reviewed-text: #1e6b34;
+  --accent-tint: rgba(212, 77, 51, 0.14);
   --font: var(--font-roboto), "Roboto", system-ui, sans-serif;
 }
 
@@ -767,6 +770,230 @@ h3 {
   margin-top: 80px;
 }
 
+/* "Explain this decision" (components/ExplainLayer.tsx) */
+
+.explain-hint {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--panel);
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.explain-hint strong {
+  margin-right: 6px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.explain-hint + .explain-layer > .project-intro {
+  margin-top: 24px;
+}
+
+.explain-layer {
+  position: relative;
+}
+
+.explain-phrase {
+  text-decoration: underline dotted var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.explain-phrase:hover,
+.explain-phrase[aria-expanded="true"] {
+  background: var(--accent-tint);
+}
+
+.explain-phrase:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.explain-popover {
+  position: absolute;
+  top: var(--explain-top);
+  left: var(--explain-left);
+  z-index: 30;
+  width: var(--explain-width);
+  padding: 24px;
+  border: 1px solid var(--black);
+  border-radius: 30px;
+  background: var(--bg);
+  box-shadow: 0 16px 40px rgba(10, 10, 31, 0.14);
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--text);
+  animation: explain-in 0.18s ease both;
+}
+
+.explain-popover:focus {
+  outline: none;
+}
+
+.explain-popover p {
+  margin: 0;
+}
+
+@keyframes explain-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.explain-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.explain-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.4px;
+}
+
+.explain-badge-reviewed {
+  background: var(--reviewed-bg);
+  color: var(--reviewed-text);
+}
+
+.explain-close {
+  width: 32px;
+  height: 32px;
+  margin: -6px -8px -6px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font: inherit;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.explain-close:hover {
+  background: var(--panel);
+  color: var(--black);
+}
+
+.explain-popover .explain-title {
+  margin-top: 16px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.explain-popover .explain-label {
+  margin: 18px 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.explain-quote {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.explain-quote blockquote {
+  margin: 0;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.explain-quote figcaption {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14.4px;
+  color: var(--muted);
+}
+
+.explain-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+.explain-jump {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.explain-jump:hover {
+  text-decoration: underline;
+}
+
+.explain-foot span {
+  font-size: 12px;
+  line-height: 14.4px;
+  color: var(--muted);
+}
+
+.explain-backdrop {
+  display: none;
+}
+
+/* The quoted section briefly lights up after "Jump to the source". */
+.explain-flash {
+  border-radius: 10px;
+  animation: explain-flash 1.8s ease;
+}
+
+.explain-flash:focus {
+  outline: none;
+}
+
+@keyframes explain-flash {
+  0%,
+  35% {
+    background: var(--accent-tint);
+    box-shadow: 0 0 0 12px var(--accent-tint);
+  }
+
+  100% {
+    background: transparent;
+    box-shadow: 0 0 0 12px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explain-popover {
+    animation: none;
+  }
+
+  .explain-flash {
+    animation: none;
+    background: var(--accent-tint);
+    box-shadow: 0 0 0 12px var(--accent-tint);
+  }
+}
+
 /* Tablet */
 
 @media (max-width: 1199px) {
@@ -1102,5 +1329,53 @@ h3 {
 
   .project .connect {
     margin-top: 60px;
+  }
+
+  /* "Explain this decision" becomes a bottom sheet */
+  .explain-popover {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    width: auto;
+    max-height: 75vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+    border-width: 1px 0 0;
+    border-radius: 24px 24px 0 0;
+    animation-name: explain-sheet-in;
+    animation-duration: 0.25s;
+  }
+
+  .explain-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(10, 10, 31, 0.3);
+  }
+
+  .explain-hint {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .explain-hint + .explain-layer > .project-intro {
+    margin-top: 40px;
+  }
+}
+
+@keyframes explain-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (max-width: 809px) and (prefers-reduced-motion: reduce) {
+  .explain-popover {
+    animation: none;
   }
 }
