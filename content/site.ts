@@ -110,7 +110,7 @@ export const projects: Project[] = [
     related: ["venato", "greenmatch"],
     titleHtml: "Social Bonding: a strategy to build a trust-centered social media app",
     summaryHtml:
-      "<p>Users have several trust issues when entering social media contexts, specially when it comes to prove the authenticity of the people they interact with, which directly impacts their will to engage and form meaningful connections.<br><br>Through early research, interviews, and competitive analysis, I identified key areas where users feel unsafe on other platforms, and designed a <strong>trust-centered user experience</strong>.</p>" +
+      "<p>Users have several trust issues when entering social media contexts, specially when it comes to prove the authenticity of the people they interact with, which directly impacts their will to engage and form meaningful connections.<br><br>Through early research, interviews, and competitive analysis, I identified key areas where users feel unsafe on other platforms, and designed a <strong><span data-explain=\"sb-trust-centered\">trust-centered user experience</span></strong>.</p>" +
       "<p>(project under NDA, some details about the product may have been changed)</p>",
     detailsHtml:
       "<p><strong>TEAM</strong> - 3 Product designers, Developers, Project Manager</p>" +
@@ -144,7 +144,7 @@ export const projects: Project[] = [
         id: "research-1",
         left: "<p><strong>1/4 - Researching the competition to better understand existing painpoints</strong></p><p>Another useful step was <span data-explain=\"sb-competition\">analyzing the most popular social media platforms</span>, to better target the main problems highlighted during the first interview.</p><p>This helped us to research common weaknesses and pain points, but also existing way they may have to provide safe interactions.</p>",
         right:
-          "<p><strong>2/4 Breaking down the main issues, to define solutions to tackle them</strong></p><p>Visualizing the main painpoints on a board has been useful for brainstorming solutions to tackle them.</p><p>For everyone of the main painpoints, we broke down some possible solutions, oriented to improve interactions between user and build a safe platform.</p>",
+          "<p><strong>2/4 Breaking down the main issues, to define solutions to tackle them</strong></p><p><span data-explain=\"sb-board\">Visualizing the main painpoints on a board</span> has been useful for brainstorming solutions to tackle them.</p><p>For everyone of the main painpoints, we broke down some possible solutions, oriented to improve interactions between user and build a safe platform.</p>",
       },
       { type: "image", image: img("social-bonding-competitors.png", 2048, 1506) },
       {
@@ -161,7 +161,7 @@ export const projects: Project[] = [
         id: "research-3",
         left: "<p><strong>3/4 Implementing flows to improve safer engagement</strong></p><p>The core issue is <strong><span data-explain=\"sb-trust-first\">trust before engagement</span></strong>, so the solutions implemented are meant to reduce uncertainty before the interaction happens.</p><p>Some of the applied solutions are:</p><ul><li><span data-explain=\"sb-verification\">requesting identity verification</span> before allowing allowing users to start to engage with other people on the platform, under any aspect (friends request, direct messaging, creation of events and meetups...)</li><li><span data-explain=\"sb-hidden-photo\">hiding the profile picture</span> when viewing profiles of users who are not friends yet</li><li>limting the user profile view to matching interest, and showing a <span data-explain=\"sb-affinity\">percentage of affinity</span> according to interests that two users have in common</li></ul>",
         right:
-          "<p><strong>4/4 Cross-department iteration and feedback to validate decisions and integrate them in the product</strong></p><p>Because these decisions impacted not only the user experience but also moderation technical feasibility, and business priorities, collaboration with other departments is an important part of the workflow.</p><p>One focus area was for example <strong><span data-explain=\"sb-light-onboarding\">balancing users’ trust with onboarding friction</span></strong>, which required some back and forth between design exploration and stakeholder alignment, to find solutions that secure trust, but don’t create too much friction and drop off.</p><p>A solution for solving this was found by providing the user with a very light sign up and onboarding flow, which doesn’t require too many verification steps, and adding some extra security layer the moment when users start engaging with other people.</p>",
+          "<p><strong>4/4 Cross-department iteration and feedback to validate decisions and integrate them in the product</strong></p><p>Because these decisions impacted not only the user experience but also moderation technical feasibility, and business priorities, <span data-explain=\"sb-cross-department\">collaboration with other departments</span> is an important part of the workflow.</p><p>One focus area was for example <strong><span data-explain=\"sb-light-onboarding\">balancing users’ trust with onboarding friction</span></strong>, which required some back and forth between design exploration and stakeholder alignment, to find solutions that secure trust, but don’t create too much friction and drop off.</p><p>A solution for solving this was found by providing the user with a very light sign up and onboarding flow, which doesn’t require too many verification steps, and adding some extra security layer the moment when users start engaging with other people.</p>",
       },
       { type: "image", image: img("social-bonding-flows.png", 2048, 1781) },
       {
@@ -174,10 +174,11 @@ export const projects: Project[] = [
       { type: "heading", text: "CONCLUSIONS - METRICS WE WILL TRACK AND FUTURE IMPROVEMENTS" },
       {
         type: "text",
+        id: "conclusions",
         html:
           "<p>As the goal is to integrate as much as possible safe interactions between users, we want to start to focus on turning our qualitative insights into measurable outcomes. To validate our trust-driven design, we'll track:</p>" +
           "<ul class=\"spaced\">" +
-          "<li><strong>User Verification Completion Rate</strong><br><em>How many users complete ID + info verification?</em> This will show friction or trust barriers at onboarding.</li>" +
+          "<li><strong><span data-explain=\"sb-verification-rate\">User Verification Completion Rate</span></strong><br><em>How many users complete ID + info verification?</em> This will show friction or trust barriers at onboarding.</li>" +
           "<li><strong>Successful Mutual Connections</strong><br><em>How often do users match based on shared interests, and how many of those connections turn into meaningful interactions (messages/events)?</em></li>" +
           "<li><strong>Spam or Abuse Reports Per 1,000 Users</strong><br><em>A benchmark for trust &amp; safety effectiveness compared to industry standards.</em></li>" +
           "<li><strong>Event Participation &amp; Show-Up Rate</strong><br><em>Are verified local meetups resulting in real engagement?</em></li>" +
@@ -186,8 +187,8 @@ export const projects: Project[] = [
           "<p><strong>ROOM FOR IMPROVEMENTS</strong></p>" +
           "<p>While our foundational safety features address critical gaps in the social media landscape, we're already looking ahead to enhance both <em>trust</em> and <em>connection quality</em>. Our roadmap includes:</p>" +
           "<ul class=\"spaced\">" +
-          "<li><strong>Progressive Verification</strong><br>Verify user information in several steps (e.g., phone number first, ID later) to reduce onboarding friction while maintaining safety - we are already getting there, as we ask users to verify email/phone number and location during the onboarding, and their ID later on</li>" +
-          "<li><strong>Contextual Safety Nudges</strong><br>Microcopy or UI prompts that guide user behavior (e.g., “You’re about to share your location with a new contact”).</li>" +
+          "<li><strong><span data-explain=\"sb-progressive\">Progressive Verification</span></strong><br>Verify user information in several steps (e.g., phone number first, ID later) to reduce onboarding friction while maintaining safety - we are already getting there, as we ask users to verify email/phone number and location during the onboarding, and their ID later on</li>" +
+          "<li><strong><span data-explain=\"sb-nudges\">Contextual Safety Nudges</span></strong><br>Microcopy or UI prompts that guide user behavior (e.g., “You’re about to share your location with a new contact”).</li>" +
           "<li><strong>Improving Interest Matching</strong><br>Introducing intent tagging (e.g., “collaborate,” “learn,” “meetup”) to refine how matches are made beyond just shared topics, and build more meaningful connections</li>" +
           "<li><strong>Post-Interaction Feedback Loops</strong><br>Letting users rate their experience after events or conversations to continuously improve match quality and community safety.</li>" +
           "</ul>",
@@ -201,11 +202,11 @@ export const projects: Project[] = [
     titleHtml:
       "Greenmatch: <strong>solving conversion drop-off in an acquisition flow through UX and trust optimization</strong>",
     summaryHtml:
-      "<p>This case focused on improving a lead generation flow where <strong>usability issues, accessibility barriers, and low trust signals</strong> were causing users to abandon the quote process, directly impacting lead conversion.</p>" +
+      "<p>This case focused on improving a lead generation flow where <strong><span data-explain=\"gm-three-causes\">usability issues, accessibility barriers, and low trust signals</span></strong> were causing users to abandon the quote process, directly impacting lead conversion.</p>" +
       "<p>I transformed a high-friction acquisition flow into a clearer, trust-led experience designed to reduce abandonment and unlock higher lead conversion.</p>",
     detailsHtml:
       "<p><strong>TEAM</strong> - Product designer (me), Lead Designer</p>" +
-      "<p><strong>MY ROLE</strong> - I conducted usability and accessibility tests, as well as UX research for improving the current design of the lead gen form</p>" +
+      "<p><strong>MY ROLE</strong> - I conducted <span data-explain=\"gm-accessibility-tests\">usability and accessibility tests</span>, as well as UX research for improving the current design of the lead gen form</p>" +
       "<p><strong>PROJECT SCOPE</strong> - Improving the lead gen form (case study assignment)</p>" +
       "<p><strong>YEAR</strong> - 2024</p>",
     cover: {
@@ -222,13 +223,14 @@ export const projects: Project[] = [
       {
         type: "columns",
         id: "research",
-        left: "<p><strong>1/2 Three layers of discovery to uncover core issues in the form</strong></p><p>I structured discovery into <span data-explain=\"gm-three-layers\">three layers</span>:</p><ol class=\"spaced\"><li>usability and accessibility evaluation of the existing flow (testing the flow, conducting accessibility tests);</li><li>qualitative review analysis through <span data-explain=\"gm-reviews\">Trustpilot reviews</span> to understand abandonment triggers;</li><li>competitor analysis to identify expected trust and reassurance patterns.</li></ol>",
+        left: "<p><strong>1/2 Three layers of discovery to uncover core issues in the form</strong></p><p>I structured discovery into <span data-explain=\"gm-three-layers\">three layers</span>:</p><ol class=\"spaced\"><li>usability and accessibility evaluation of the existing flow (testing the flow, conducting accessibility tests);</li><li>qualitative review analysis through <span data-explain=\"gm-reviews\">Trustpilot reviews</span> to understand abandonment triggers;</li><li><span data-explain=\"gm-competitors\">competitor analysis</span> to identify expected trust and reassurance patterns.</li></ol>",
         right:
           "<p><strong>2/2 Putting together the findings from the research to design solutions</strong></p><p>The research revealed that the core issues were not only related to lack of usability, but also <strong><span data-explain=\"gm-follow-up\">lack of information and trust concerning follow-up</span></strong> after the form completion.</p><p>I prioritized two design solutions:</p><ol class=\"spaced\"><li><strong><span data-explain=\"gm-cognitive-friction\">reduce cognitive friction</span></strong> of the form by improving its structure and accessibility;</li><li><strong><span data-explain=\"gm-trust-information\">increase trust and improve information</span></strong> about benefits and expectations after completing the flow</li></ol>",
       },
       { type: "image", image: img("greenmatch-competitors.png", 2048, 1008) },
       {
         type: "caption",
+        id: "competitors-caption",
         text: "Conducting a competitor analysis helped me to spot some recurring patterns to be used in Greenmatch Solar form and also some elements that the competition was missing and that could help Greenmatch to stand out.",
       },
       { type: "image", image: img("greenmatch-brief.png", 2048, 1396) },
@@ -248,7 +250,8 @@ export const projects: Project[] = [
       { type: "heading", text: "LEARNINGS FROM THE PROJECT" },
       {
         type: "text",
-        html: "<p>Although this originated as a design challenge, I approached it as a <strong>real business and product problem rather</strong> than an isolated UI exercise.<br>My focus was on demonstrating not only the solution, but the decision-making process behind it.</p><p>What I’m most proud of in this project is how the redesign moved beyond surface usability fixes and addressed the deeper dynamics driving users’ abandonment.</p>",
+        id: "learnings",
+        html: "<p>Although this originated as a design challenge, I approached it as a <strong><span data-explain=\"gm-business-problem\">real business and product problem</span> rather</strong> than an isolated UI exercise.<br>My focus was on demonstrating not only the solution, but the decision-making process behind it.</p><p>What I’m most proud of in this project is how the redesign moved beyond surface usability fixes and addressed the <span data-explain=\"gm-deeper-dynamics\">deeper dynamics driving users’ abandonment</span>.</p>",
       },
     ],
   },
@@ -258,8 +261,8 @@ export const projects: Project[] = [
     related: ["social-bonding", "greenmatch"],
     titleHtml: "Venato: reducing seller listing friction by 85% through rapid product validation",
     summaryHtml:
-      "<p>Online resellers experience extremely <strong>high-friction in the reselling workflow.</strong> They spend between 40 and 120 minutes to create a single listing, which made the effort disproportionate to the financial return.</p>" +
-      "<p>I transformed a high-friction reseller workflow into a rapid, AI-assisted listing experience that <strong>reduced creation time by 85% and improved seller decision confidence</strong>.</p>",
+      "<p>Online resellers experience extremely <strong>high-friction in the reselling workflow.</strong> They spend <span data-explain=\"ve-listing-time\">between 40 and 120 minutes</span> to create a single listing, which made the effort disproportionate to the financial return.</p>" +
+      "<p>I transformed a high-friction reseller workflow into a rapid, AI-assisted listing experience that <strong><span data-explain=\"ve-85-percent\">reduced creation time by 85%</span> and improved seller decision confidence</strong>.</p>",
     detailsHtml:
       "<p><strong>TEAM</strong> - Product designer (me), CTO, Project Manager</p>" +
       "<p><strong>MY ROLE</strong> - I led the whole design process, from initial research to implementation</p>" +
@@ -284,7 +287,7 @@ export const projects: Project[] = [
       {
         type: "columns",
         id: "research-3",
-        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a <span data-explain=\"ve-rapid-loop\">rapid loop</span> of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, collaboration with the CTO and the Project Manager was crucial to validate design decisions.</p>",
+        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a <span data-explain=\"ve-rapid-loop\">rapid loop</span> of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, <span data-explain=\"ve-cto-pm\">collaboration with the CTO and the Project Manager</span> was crucial to validate design decisions.</p>",
         right:
           "<p><strong>4/4 - Quick wireframing and prototyping to validate product value proposition with test users</strong></p><p><span data-explain=\"ve-early-wireframes\">Wireframes were reviewed early</span> with the CTO and PM to quickly validate feasibility, business value, and investor-facing clarity before moving into high-fidelity design and prototyping.</p>",
       },
@@ -298,7 +301,8 @@ export const projects: Project[] = [
       { type: "heading", text: "USERS' VALIDATION AND REACTIONS" },
       {
         type: "text",
-        html: "<p>The final prototype successfully demonstrated the product’s value proposition to early target users.<br>In user validation, the strongest feedback centered around the reduction in listing effort and the perceived value of inventory tracking:</p>",
+        id: "validation",
+        html: "<p>The final prototype successfully demonstrated the product’s value proposition to early target users.<br>In <span data-explain=\"ve-user-validation\">user validation</span>, the strongest feedback centered around the reduction in listing effort and the perceived value of inventory tracking:</p>",
       },
       { type: "image", image: img("venato-feedback.png", 1800, 1013) },
       { type: "heading", text: "FINAL CONSIDERATIONS" },
