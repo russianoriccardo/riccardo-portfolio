@@ -24,6 +24,13 @@ export type Explanation = {
 
 export type ProjectExplanations = Record<string, Explanation>;
 
+// Response of POST /api/explain (free-text selections). `supported: false` means the page doesn't
+// explain the selection, so the popover shows "Not covered on this page" instead of guessing.
+export type ExplainApiResponse = ({ supported: true } & Explanation) | { supported: false };
+
+// Case studies whose unmatched selections never go to the model (under NDA).
+export const noLiveExplanations = ["social-bonding"];
+
 export const explanations: Record<string, ProjectExplanations> = {
   // Under NDA: only explain what the page explicitly states.
   "social-bonding": {

@@ -15,6 +15,10 @@
   --media-bg: #f6f6f8;
   --reviewed-bg: #e3f3e6;
   --reviewed-text: #1e6b34;
+  --generated-bg: #fdf0d5;
+  --generated-text: #8a5a00;
+  --missing-bg: #fbe4e1;
+  --missing-text: #a33224;
   --accent-tint: rgba(212, 77, 51, 0.14);
   --font: var(--font-roboto), "Roboto", system-ui, sans-serif;
 }
@@ -865,6 +869,44 @@ h3 {
 .explain-badge-reviewed {
   background: var(--reviewed-bg);
   color: var(--reviewed-text);
+}
+
+.explain-badge-generated {
+  background: var(--generated-bg);
+  color: var(--generated-text);
+}
+
+.explain-badge-missing {
+  background: var(--missing-bg);
+  color: var(--missing-text);
+}
+
+.explain-popover .explain-status {
+  margin-top: 12px;
+}
+
+.explain-email {
+  font-weight: 700;
+  user-select: all;
+}
+
+/* Floating button above a text selection */
+.explain-select {
+  position: absolute;
+  z-index: 25;
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--button-text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(10, 10, 31, 0.18);
+  transform: translateY(calc(-100% - 8px));
+  cursor: pointer;
 }
 
 .explain-close {

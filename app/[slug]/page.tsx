@@ -8,8 +8,9 @@ import ExplainLayer from "@/components/ExplainLayer";
 import { ArrowLeft } from "@/components/Icons";
 import ProjectCard from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
-import { explanations } from "@/content/explanations";
-import { getProject, projects, type Block } from "@/content/site";
+import { explanations, noLiveExplanations } from "@/content/explanations";
+import { getProject, projects, site, type Block } from "@/content/site";
+import { sectionId } from "@/content/text";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const sizes = "(max-width: 1040px) 100vw, 1000px";
 
 function renderBlock(block: Block, i: number) {
-  // Blocks with an id can be the target of an explanation's "Jump to the source" link.
-  const id = block.id ? `src-${block.id}` : undefined;
+  // Every block gets an anchor for an explanation's "Jump to the source" link (see content/text.ts).
+  const id = `src-${sectionId(block, i)}`;
   switch (block.type) {
     case "heading":
       return <h2 key={i} id={id} className="block block-heading">{block.text}</h2>;
@@ -87,7 +88,12 @@ export default async function ProjectPage({ params }: Props) {
         </p>
       )}
 
-      <ExplainLayer explanations={projectExplanations}>
+      <ExplainLayer
+        slug={project.slug}
+        explanations={projectExplanations}
+        liveExplanations={!noLiveExplanations.includes(project.slug)}
+        email={site.email}
+      >
         <div id="src-intro" className="columns project-intro">
           <div className="rich" dangerouslySetInnerHTML={{ __html: project.summaryHtml }} />
           <div className="rich" dangerouslySetInnerHTML={{ __html: project.detailsHtml }} />
