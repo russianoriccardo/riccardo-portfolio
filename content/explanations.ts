@@ -237,9 +237,9 @@ export const explanations: Record<string, ProjectExplanations> = {
     },
     "gm-accessibility-tests": {
       decision: "Test the existing form for usability and accessibility before redesigning it.",
-      quote: "MY ROLE - I conducted usability and accessibility tests, as well as UX research for improving the current design of the lead gen form",
-      source: "Overview",
-      sourceId: "intro",
+      quote: "usability and accessibility evaluation of the existing flow (testing the flow, conducting accessibility tests);",
+      source: "Research 1/2",
+      sourceId: "research",
       why: "Accessibility barriers were one of the reasons users abandoned the quote process, so testing for them was part of the work from the start.",
       principle: "Curb-cut effect",
       principleNote: "Improvements made for people with disabilities often make things easier for everyone.",
@@ -359,15 +359,6 @@ export const explanations: Record<string, ProjectExplanations> = {
       why: "A listing used to take 40 to 120 minutes, so the 85% reduction in creation time shows how much of that effort the AI-assisted flow removed.",
       principle: "Time on task",
       principleNote: "How long a core task takes is one of the most direct measures of usability.",
-    },
-    "ve-cto-pm": {
-      decision: "Validate design decisions with the CTO and Project Manager as they're made.",
-      quote: "In this context, collaboration with the CTO and the Project Manager was crucial to validate design decisions.",
-      source: "Research 3/4",
-      sourceId: "research-3",
-      why: "Speed was critical, so stakeholder validation and feedback were part of the rapid design loop itself, not a step at the end.",
-      principle: "Shared understanding",
-      principleNote: "Teams move faster when the people making decisions agree on them early, rather than at the end.",
     },
     "ve-user-validation": {
       decision: "Test the final prototype with early target users.",

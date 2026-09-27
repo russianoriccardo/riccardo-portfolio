@@ -287,7 +287,7 @@ export const projects: Project[] = [
       {
         type: "columns",
         id: "research-3",
-        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a <span data-explain=\"ve-rapid-loop\">rapid loop</span> of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, <span data-explain=\"ve-cto-pm\">collaboration with the CTO and the Project Manager</span> was crucial to validate design decisions.</p>",
+        left: "<p><strong>3/4 - Cross-roles iteration loop to quickly validate design decisions</strong></p><p>Because speed was critical, I only focused on designing these 3 core features of the product by initially going through a <span data-explain=\"ve-rapid-loop\">rapid loop</span> of <strong>solution design, wireframing and stakeholders validation and feedback</strong>.</p><p>In this context, collaboration with the CTO and the Project Manager was crucial to validate design decisions.</p>",
         right:
           "<p><strong>4/4 - Quick wireframing and prototyping to validate product value proposition with test users</strong></p><p><span data-explain=\"ve-early-wireframes\">Wireframes were reviewed early</span> with the CTO and PM to quickly validate feasibility, business value, and investor-facing clarity before moving into high-fidelity design and prototyping.</p>",
       },
